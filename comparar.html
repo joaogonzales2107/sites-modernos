@@ -61,7 +61,7 @@ CLIENTES.forEach(function(c,i){
 function mostra(c){
   var ow=document.getElementById('oldwrap'),nw=document.getElementById('newwrap');
   var ol=document.getElementById('oldlink'),nl=document.getElementById('newlink');
-  var novo='sites/'+c.slug+'/'+c.slug+'.html';
+  var novo=c.slug+'/'+c.slug+'.html';
   nw.innerHTML='<iframe src="'+novo+'"></iframe>';nl.href=novo;
   if(c.old){ow.innerHTML='<iframe src="'+c.old+'"></iframe>';ol.href=c.old;ol.style.display='inline'}
   else{ow.innerHTML='<div class="empty"><strong>Sem site para comparar</strong><span>'+(c.motivo||'')+'</span></div>';ol.style.display='none'}
