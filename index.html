@@ -2,10 +2,61 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0;url=comparar.html">
-<title>Sites Modernos — Redesigns</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sites Modernos — Prospectos</title>
+<style>
+  :root{--bg:#0f1420;--card:#1a2130;--ink:#e8ecf4;--muted:#8a97ad;--line:#2a3346;--teal:#22d3ee;--green:#22c55e}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,'Segoe UI',Roboto,sans-serif;padding:32px 20px;min-height:100vh}
+  .wrap{max-width:900px;margin:0 auto}
+  header{margin-bottom:32px}
+  h1{font-size:26px;margin-bottom:6px}
+  p.sub{color:var(--muted);font-size:14px}
+  .grid{display:grid;gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;transition:border-color .2s}
+  .card:hover{border-color:var(--teal)}
+  .info h2{font-size:17px;margin-bottom:4px}
+  .info p{color:var(--muted);font-size:13px}
+  .badge{display:inline-block;background:rgba(34,197,94,.15);color:var(--green);font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;margin-left:8px;vertical-align:middle}
+  .actions{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{background:var(--teal);color:#04222a;text-decoration:none;font-size:13px;font-weight:700;padding:9px 16px;border-radius:9px}
+  .btn.ghost{background:transparent;color:var(--teal);border:1px solid var(--line)}
+  .btn:hover{filter:brightness(1.15)}
+  footer{margin-top:28px;color:var(--muted);font-size:12px;text-align:center}
+</style>
 </head>
-<body style="font-family:sans-serif;background:#0f1420;color:#e8ecf4;display:grid;place-items:center;min-height:100vh;margin:0">
-<p>Redirecionando para o <a href="comparar.html" style="color:#22d3ee">comparador</a>…</p>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🚀 Sites Modernos</h1>
+    <p class="sub">Redesigns premium de prospectos — cada pasta é um cliente.</p>
+  </header>
+  <div class="grid" id="lista"></div>
+  <footer>Atualizado em <span id="data"></span></footer>
+</div>
+<script>
+// Cadastro de prospectos — adicione um objeto por cliente
+var PROSPECTOS=[
+  {
+    nome:"Bertoni Odontologia",
+    slug:"bertoni-odontologia",
+    nicho:"Odontologia",
+    status:"Redesign publicado",
+    atualizado:"17/07/2026"
+  }
+];
+var lista=document.getElementById('lista');
+PROSPECTOS.forEach(function(p){
+  var card=document.createElement('div');card.className='card';
+  card.innerHTML='<div class="info"><h2>'+p.nome+'<span class="badge">'+p.status+'</span></h2>'+
+    '<p>'+p.nicho+' · atualizado '+p.atualizado+'</p></div>'+
+    '<div class="actions">'+
+    '<a class="btn" href="prospectos/'+p.slug+'/">Ver redesign ↗</a>'+
+    '<a class="btn ghost" href="comparar.html#'+p.slug+'">Comparar</a>'+
+    '</div>';
+  lista.appendChild(card);
+});
+document.getElementById('data').textContent=new Date().toLocaleDateString('pt-BR');
+</script>
 </body>
 </html>

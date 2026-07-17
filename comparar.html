@@ -43,7 +43,7 @@
     <div id="newwrap"></div>
   </div>
 </div>
-<p class="hint">Dica: para editar uma página, abra o arquivo <b>[cliente]-editor.html</b> na pasta sites/[cliente]/.</p>
+<p class="hint">Dica: para editar uma página, abra o arquivo <b>editor.html</b> na pasta prospectos/[cliente]/.</p>
 <script>
 var CLIENTES=[
   {
@@ -61,12 +61,18 @@ CLIENTES.forEach(function(c,i){
 function mostra(c){
   var ow=document.getElementById('oldwrap'),nw=document.getElementById('newwrap');
   var ol=document.getElementById('oldlink'),nl=document.getElementById('newlink');
-  var novo=c.slug+'/'+c.slug+'.html';
+  var novo='prospectos/'+c.slug+'/';
   nw.innerHTML='<iframe src="'+novo+'"></iframe>';nl.href=novo;
   if(c.old){ow.innerHTML='<iframe src="'+c.old+'"></iframe>';ol.href=c.old;ol.style.display='inline'}
   else{ow.innerHTML='<div class="empty"><strong>Sem site para comparar</strong><span>'+(c.motivo||'')+'</span></div>';ol.style.display='none'}
 }
-if(CLIENTES.length)mostra(CLIENTES[0]);
+var inicial=CLIENTES[0];
+var hash=location.hash.replace('#','');
+if(hash){var found=CLIENTES.find(function(c){return c.slug===hash});if(found)inicial=found}
+if(inicial){
+  mostra(inicial);
+  document.querySelectorAll('.tab').forEach(function(t){if(t.textContent===inicial.nome)t.classList.add('on')});
+}
 </script>
 </body>
 </html>
