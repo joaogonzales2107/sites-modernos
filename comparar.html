@@ -27,11 +27,14 @@
   .empty{height:72vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--muted);text-align:center;padding:20px}
   .empty strong{color:var(--old);font-size:17px}
   .hint{color:var(--muted);font-size:12px;margin-top:14px}
+  .shot{height:72vh;overflow-y:auto;background:#fff;display:block}
+  .shot img{width:100%;display:block}
+  .tag-static{font-size:10px;background:var(--line);color:var(--muted);padding:2px 7px;border-radius:6px;font-weight:600;margin-left:6px}
 </style>
 </head>
 <body>
 <h1>Antes vs Depois</h1>
-<p class="sub">Esquerda: site atual do cliente · Direita: nova versão criada. Se o site antigo não carregar aqui (alguns bloqueiam incorporação), use o link "abrir em nova aba".</p>
+<p class="sub">Esquerda: site atual do cliente (captura estática — o site não tem HTTPS e não pode ser incorporado ao vivo) · Direita: nova versão criada, rodando ao vivo. Use "abrir em nova aba" para navegar no site atual.</p>
 <div class="tabs" id="tabs"></div>
 <div class="cols">
   <div class="col">
@@ -50,13 +53,15 @@ var CLIENTES=[
     "nome":"Bertoni · V1",
     "slug":"bertoni-odontologia",
     "versao":"",
-    "old":"http://bertoniodontologia.com.br"
+    "old":"http://bertoniodontologia.com.br",
+    "oldImg":"prospectos/bertoni-odontologia/site-atual.png"
   },
   {
     "nome":"Bertoni · V2 (nova)",
     "slug":"bertoni-odontologia",
     "versao":"v2/",
-    "old":"http://bertoniodontologia.com.br"
+    "old":"http://bertoniodontologia.com.br",
+    "oldImg":"prospectos/bertoni-odontologia/site-atual.png"
   }
 ];
 var tabs=document.getElementById('tabs');
@@ -70,7 +75,8 @@ function mostra(c){
   var ol=document.getElementById('oldlink'),nl=document.getElementById('newlink');
   var novo='prospectos/'+c.slug+'/'+(c.versao||'');
   nw.innerHTML='<iframe src="'+novo+'"></iframe>';nl.href=novo;
-  if(c.old){ow.innerHTML='<iframe src="'+c.old+'"></iframe>';ol.href=c.old;ol.style.display='inline'}
+  if(c.oldImg){ow.innerHTML='<div class="shot"><img src="'+c.oldImg+'" alt="Captura do site atual"></div>';ol.href=c.old;ol.style.display='inline'}
+  else if(c.old){ow.innerHTML='<iframe src="'+c.old+'"></iframe>';ol.href=c.old;ol.style.display='inline'}
   else{ow.innerHTML='<div class="empty"><strong>Sem site para comparar</strong><span>'+(c.motivo||'')+'</span></div>';ol.style.display='none'}
 }
 var inicial=CLIENTES[CLIENTES.length-1];
